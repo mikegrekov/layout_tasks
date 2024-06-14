@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#" lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>DMV Assistant</title>
+
+  <link rel="canonical" href="https://driving-tests.org/dmv-assistant/chat/">
+  <meta property="og:url" content="https://driving-tests.org/dmv-assistant/chat/">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:title" itemprop="title" content="DMV Assistant" />
+  <meta property="og:site_name" content="Driving-Tests.org">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="http://driving-tests.org/img/og/main.jpg">
+  <meta property="og:image:secure_url" content="https://driving-tests.org/img/og/main.jpg">
+
+  <meta property="og:description" itemprop="description" name="description" content="Get a free personalized checklist before you go. Instantly learn how to apply for, renew or exchange your driver, motorcycle or CDL license">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@driving_tests">
+
+  <link rel="alternate" media="only screen and (max-width: 640px)" href="https://m.driving-tests.org/dmv-assistant/chat/">
+  <link rel="alternate" media="handheld, only screen and (max-width: 640px)" href="https://m.driving-tests.org/dmv-assistant/chat/">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+  <link rel="manifest" href="/manifest.json?v=2">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg?v=2" color="#3667f6">
+  <link rel="shortcut icon" href="/favicon.ico?v=2">
+  <meta name="msapplication-TileColor" content="#3667f6">
+  <meta name="theme-color" content="#ffffff">
+
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="dns-prefetch" href="https://s.driving-tests.org">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
+  <link rel="stylesheet" href="https://s.driving-tests.org/dmv-assistant/chat/css/feedback.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="https://s.driving-tests.org/dmv-assistant/chat/css/style.rv18.css">
+  <link rel="stylesheet" href="https://s.driving-tests.org/dmv-assistant/chat/css/animate.css">
+  <link href="https://s.driving-tests.org/dmv-assistant/chat/css/datepicker.css" rel="stylesheet" type="text/css" />
+  <script type='text/javascript' src='https://s.driving-tests.org/dmv-assistant/chat/lib/jquery.js'></script>
+  <script>
+    window['_fs_debug'] = false;
+    window['_fs_host'] = 'www.fullstory.com';
+    window['_fs_org'] = '32GH3';
+    window['_fs_namespace'] = 'FS';
+    (function (m, n, e, t, l, o, g, y) {
+      if (e in m && m.console && m.console.log) { m.console.log('FullStory namespace conflict. Please set window["_fs_namespace"].'); return; }
+      g = m[e] = function (a, b) { g.q ? g.q.push([a, b]) : g._api(a, b); }; g.q = [];
+      o = n.createElement(t); o.async = 1; o.src = 'https://' + _fs_host + '/s/fs.js';
+      y = n.getElementsByTagName(t)[0]; y.parentNode.insertBefore(o, y);
+      g.identify = function (i, v) { g(l, { uid: i }); if (v) g(l, v) }; g.setUserVars = function (v) { g(l, v) };
+      g.identifyAccount = function (i, v) { o = 'account'; v = v || {}; v.acctId = i; g(o, v) };
+      g.clearUserCookie = function (c, d, i) {
+        if (!c || document.cookie.match('fs_uid=[`;`]*`[`;`]*`[`;`]*`')) {
+          d = n.domain; while (1) {
+            n.cookie = 'fs_uid=;domain=' + d +
+              ';path=/;expires=' + new Date(0).toUTCString(); i = d.indexOf('.'); if (i < 0) break; d = d.slice(i + 1)
+          }
+        }
+      };
+    })(window, document, window['_fs_namespace'], 'script', 'user');
+  </script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NE033XGXGG"></script>
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NE033XGXGG', { 'send_page_view': true });
+    gtag('config', 'UA-6473414-24', { 'send_page_view': true });
+  </script>
+
+</head>
+
+<body>
+
+  <!--
+    <div class="people-list" id="people-list">
+      <div class="search">
+        <div class="header-avatar"><img src="img/logo.png"/></div>
+        <div class="header-title"><div class="header-title-main">Driving-Tests.org</div><div class="header-title-hashtag">Your DMV questions. Answered.</div></div>
+      </div>
+      <div class="profile">
+        <div class="profile-title">Your profile</div>
+        <div class="profile-subtitle">This is what you've told me so far:</div>
+        <div class="profile-info"></div>
+      </div>
+      <script id="info-template" type="text/x-handlebars-template">
+        {{#if name}}{{#if action}}{{#if category}}{{#if state}}
+          <span class="user-data">{{name}}</span> is interested in <span class="user-data">{{action}}</span> a <span class="user-data">{{category}}</span> license in <span class="user-data">{{state}}</span>.
+        {{/if}}{{/if}}{{/if}}{{/if}}
+        {{#if name}}{{#if born}}{{#if age}}
+          {{name}} is <span class="user-data">{{age}}</span> years old (born on <span class="user-data">{{born}}</span>).
+        {{/if}}{{/if}}{{/if}}
+        {{#if name}}{{#if state}}{{#if resident}}{{#if art_state}}
+          {{name}} <span class="user-data">{{resident}}</span> {{art_state}} resident.
+        {{/if}}{{/if}}{{/if}}{{/if}}
+
+      </script>
+-->
+  <!--<ul class="list"></ul>-->
+  <!--
+      <ul class="menu">
+        <li id="page_index" class="menu-item active">DMV Genius</li>
+        <li id="page_about" class="menu-item">About</li>
+        <li id="page_shortcuts" class="menu-item">Keyboard shortcuts</li>
+        <li id="page_help" class="menu-item">Help</li>
+        <li id="page_terms" class="menu-item">Terms of use</li>
+        <li id="page_policy" class="menu-item">Privacy Policy</li>
+      </ul>
+
+    </div>
+-->
+
+  <div class="chat">
+
+    <div class="chat-header-filler">
+
+      <div class="menu-content">
+        <ul class="menu">
+          <li class="menu-item start-over">Start Over</li>
+          <!--<li class="menu-item contact-human">Contact Human</li>-->
+          <li class="menu-item"><a href="https://driving-tests.org/dmv-assistant/#about" style="color: inherit;text-decoration: none;" target="_blank">About</a></li>
+          <li class="menu-item"><a href="https://driving-tests.org/dmv-assistant/#how" style="color: inherit;text-decoration: none;" target="_blank">How it works</a></li>
+        </ul>
+        <div class="copyright"><a href="https://elegantelearning.com/" style="color: inherit;text-decoration: none;" target="_blank">© 2018 Elegant E-Learning, Inc.</a></div>
+        <div class="terms">
+          <div class="terms-item"><a href="legal/terms.html" style="color: inherit;text-decoration: none;" target="_blank">Terms of use</a></div>
+          <div class="terms-item"><a href="legal/privacy.html" style="color: inherit;text-decoration: none;" target="_blank">Privacy policy</a></div>
+        </div>
+        <div class="disclaimer">Driving-Tests.org is a privately owned website that is not affiliated with or operated by any state government agency.</div>
+      </div>
+
+    </div>
+
+    <div class="chat-header clearfix">
+      <!--<img src="img/policeman.svg" alt="avatar" />-->
+      <div class="menu-wrapper">
+        <div id="menu_button"></div>
+      </div>
+
+      <div class="chat-about">
+
+        <a href="/" style="font-size: 13px;"><span style="vertical-align:middle">virtual</span>
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="32px" id="Layer_1" style="/* float: left; *//* margin: -13px 10px 0px 0; */width: 30px;height: 30px;display: inline-block;vertical-align: middle;top: 0;position: relative;" version="1.1" viewBox="0 0 32 32" width="32px" xml:space="preserve">
+            <style type="text/css">
+              .st0 {
+                fill: #F9F9FA;
+              }
+
+              .st1 {
+                fill: #ABABAB;
+              }
+
+              .st2 {
+                fill: #ACCCEC;
+              }
+
+              .st3 {
+                fill: #010101;
+              }
+            </style>
+            <g>
+              <g>
+                <g>
+                  <g>
+                    <g>
+                      <path class="st0" d="M28,27.5H4c-0.869,0-1.5-0.631-1.5-1.5V10.5h27V26C29.5,26.869,28.869,27.5,28,27.5z"></path>
+                    </g>
+                    <g>
+                      <path class="st1" d="M29.5,10.5h-27V7c0-0.869,0.631-1.5,1.5-1.5h24c0.869,0,1.5,0.631,1.5,1.5V10.5z"></path>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <rect class="st2" height="9" width="9" x="6.5" y="14.5"></rect>
+            <g>
+              <path class="st3" d="M28,5H4C2.9,5,2,5.9,2,7v19c0,1.1,0.9,2,2,2h24c1.1,0,2-0.9,2-2V7C30,5.9,29.1,5,28,5z M29,26c0,0.6-0.4,1-1,1   H4c-0.6,0-1-0.4-1-1V11h26V26z M29,10H3V7c0-0.6,0.4-1,1-1h24c0.6,0,1,0.4,1,1V10z"></path>
+              <circle class="st3" cx="13" cy="8" r="1"></circle>
+              <circle class="st3" cx="9" cy="8" r="1"></circle>
+              <circle class="st3" cx="5" cy="8" r="1"></circle>
+              <rect class="st3" height="1" width="7" x="19" y="17"></rect>
+              <rect class="st3" height="1" width="7" x="19" y="20"></rect>
+              <rect class="st3" height="1" width="4" x="19" y="23"></rect>
+              <polygon class="st3" points="16,17.003 18.867,14.137 18.16,13.43 11.003,20.586 8.699,18.282 7.992,18.989 11.002,22 15,18.003    15,23 7,23 7,15 15,15 16,14 6,14 6,24 16,24  "></polygon>
+            </g>
+          </svg>
+          <span style="vertical-align:middle">dmv assistant</span></a>
+
+      </div>
+
+      <!--<i class="fa fa-star"></i>-->
+    </div> <!-- end chat-header -->
+
+    <div class="chat-history">
+      <ul></ul>
+    </div> <!-- end chat-history -->
+
+    <div class="chat-message">
+      <div class="message-wrapper">
+        <input name="message-to-send" id="message-to-send" placeholder="Type your message" autocomplete="off"></input>
+        <span class="send-button">send</span>
+      </div>
+    </div>
+
+  </div> <!-- end chat-message -->
+
+  </div> <!-- end chat -->
+
+
+  <script id="message-template" type="text/x-handlebars-template">
+  <li class="clearfix chat-block user-msg animated bounceInRight" id="{{message_id}}">
+  {{#unless singleChoice}}<div class="change-answer-wrapper"><div class="change-answer"><span class="tooltip">Click to change this answer</span></div></div>{{/unless}}
+    <div class="message other-message">
+      {{messageOutput}}
+    </div>
+      {{#if user}}
+    <div class="user-avatar">{{letter}}</div>
+    {{else}}
+    <div class="user-avatar empty"></div>
+    {{/if}}
+  </li>
+</script>
+
+  <script id="message-response-template" type="text/x-handlebars-template">
+  <li class="chat-block bot-msg" id="{{message_id}}"{{#if cal_flag}} data-calendar="true"{{/if}}>
+  <div class="bot-avatar"></div>
+    <div class="message my-message" style="visibility: hidden">
+      {{{response}}}
+    </div>
+    <div class="send-feedback">feedback</div>
+  </li>
+</script>
+
+
+  <!--<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>-->
+  <script src="https://s.driving-tests.org/dmv-assistant/chat/lib/jquery-ui.js"></script>
+  <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
+  <script src='https://s.driving-tests.org/dmv-assistant/chat/lib/handlebars.min.js'></script>
+  <!--<script src='http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js'></script>-->
+  <script src='https://s.driving-tests.org/dmv-assistant/chat/lib/list.min.js'></script>
+  <!--<script src='http://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js'></script>-->
+  <script src="https://s.driving-tests.org/dmv-assistant/chat/lib/html2canvas.js"></script>
+  <script src="https://s.driving-tests.org/dmv-assistant/chat/lib/device.js"></script>
+  <!--<script src="lib/jquery.inputmask.bundle.js"></script>-->
+  <script src="https://s.driving-tests.org/dmv-assistant/chat/lib/jquery.maskedinput.js"></script>
+  <script src="https://s.driving-tests.org/dmv-assistant/chat/lib/jQuery.print.js"></script>
+  <script src="https://s.driving-tests.org/dmv-assistant/chat/lib/states.js"></script>
+  <script src="https://s.driving-tests.org/dmv-assistant/chat/js/index.rv10.js"></script>
+
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"89307f91ea3a5bd3","version":"2024.4.1","token":"030b21693c6c4ad497e58daf693b5ef2"}' crossorigin="anonymous"></script>
+</body>
+
+</html>
