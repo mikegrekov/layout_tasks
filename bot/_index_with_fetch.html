@@ -91,15 +91,9 @@
       display: flex;
       height: 100%;
       width: 100%;
-      padding: 2% 15% 2% 15%;
+      padding: 2% 5% 2% 3%;
       justify-content: space-between;
       flex-direction: column;
-    }
-
-    @media screen and (max-width: 768px) {
-      .main-container {
-        padding: 2% 5% 2% 5%;
-      }
     }
 
     .main-conversation {
@@ -176,70 +170,6 @@
       border: none;
       background-color: #fff;
     }
-
-    .waiting {
-      /* position: absolute; */
-      top: 0;
-      left: 0;
-      width: 50px;
-      height: 50px;
-      visibility: visible;
-      background-color: #fff;
-      border-radius: 5px;
-      -webkit-box-shadow: none;
-      -moz-box-shadow: none;
-      box-shadow: none;
-      align-items: center;
-      text-align: center;
-      display: flex;
-      display: none;
-      /* background-color: red; */
-    }
-
-    .display-flex {
-      display: flex;
-    }
-
-    /* .waiting.noshadow {
-      -webkit-box-shadow: none;
-      -moz-box-shadow: none;
-      box-shadow: none;
-    } */
-
-    .waiting span {
-      /* font-size: 48px; */
-      background-color: #434651;
-      animation-name: blink;
-      animation-duration: 1.4s;
-      animation-iteration-count: infinite;
-      animation-fill-mode: both;
-      height: 6px;
-      width: 6px;
-      margin: 2.5px;
-      border-radius: 50%;
-    }
-
-    .waiting span:nth-child(2) {
-      animation-delay: .2s;
-    }
-
-    .waiting span:nth-child(3) {
-      animation-delay: .4s;
-    }
-
-    @keyframes blink {
-      0% {
-        opacity: .2;
-      }
-
-      20% {
-        opacity: 1;
-      }
-
-      100% {
-        opacity: .2;
-      }
-    }
   </style>
   <div class="body-container">
     <header>
@@ -297,59 +227,42 @@
     <main>
       <div class="main-container">
         <div class="main-conversation" id="js-main-conversation">
-
           <!-- <div class="bot-message">
             <div class="bot-message-avatar"></div>
-            <div class="waiting">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
             <div class="bot-message-container">
-              <span></span>
-              <span></span>
-              <span></span>
+              <div class="bot-message-text" id="js-bot-message-text"></div>
+              <div class="bot-message-feedback-button"></div>
             </div>
           </div> -->
-        </div>
-      </div>
-      <!-- <div class="user-message-log" id="js-user-message-log">
+          <!-- <div class="user-message-log" id="js-user-message-log">
             <span class="user-message-log-text" id="js-user-message-log-text"></span>
           </div> -->
-  </div>
-  <div class="main-user-input">
-    <div class="user-input-wrapper">
-      <input class="user-input-message" id="js-user-input-message" placeholder="Press Enter to continue" autocomplete="off">
-      <div class="user-input-button"></div>
-    </div>
-  </div>
-  </div>
-  </main>
+        </div>
+        <div class="main-user-input">
+          <div class="user-input-wrapper">
+            <input class="user-input-message" id="js-user-input-message" placeholder="Press Enter to continue" autocomplete="off">
+            <div class="user-input-button"></div>
+          </div>
+        </div>
+      </div>
+    </main>
   </div>
   <script>
     const url = "https://driving-tests.org/dmv-assistant.ai.php";
-    const botErrors = {
-      BUSY: "Sorry, i'm currently busy. Please come back later.",
-      NO_CONNECTION: "Sorry, i have encountered a problem when trying to connect to the server. Please come back later."
-    }
-    let inititalBotText = "Hey, I'm Ellie! I'll be your virtual guide today. I can answer anything you need to know before you head to the DMV to get your learner's permit or driver's license. To get started, I just need to ask a few questions.";
+    const inititalBotText = "Hey, I'm Ellie! I'll be your virtual guide today. I can answer anything you need to know before you head to the DMV to get your learner's permit or driver's license. To get started, I just need to ask a few questions.";
+    let data = [
+      { role: "assistant", content: "Hello user!" },
+      { role: "user", content: "Hello bot!" },
+    ];
     let apiGetResults = "";
 
+    // let messageBox = document.getElementById("js-bot-message-text");
     let userInput = document.getElementById("js-user-input-message");
     let chatElements = document.getElementById("js-main-conversation");
 
     document.addEventListener("DOMContentLoaded", (event) => {
 
-      fetch(url)
-        .then((data) => {
-          addBotMessage(inititalBotText);
-          setTimeout(function () {
-            addBotMessage('What is your home state?');
-          }, 1000);
-        })
-        .catch((error) => {
-          addBotMessage(botErrors.BUSY);
-        });
+      addBotMessage(inititalBotText);
 
       userInput.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
@@ -362,54 +275,28 @@
             userInput.disabled = true;
           }, 300);
 
-          var json = JSON.stringify({ 'msg': arrayOfMessages });
-          requestAnswer(json);
+          requestAnswer(arrayOfMessages);
+          addBotMessage("Ssome response from the Bot");
         }
       });
 
     });
 
-    function requestAnswer(json) {
-
-      try {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-          if (this.readyState == 4 && this.status == 200) {
-            var response = JSON.parse(xhttp.responseText);
-            var bot_msg = '';
-            if (typeof response.error !== 'undefined') {
-              bot_msg = botErrors.NO_CONNECTION;
-            } else if (typeof response.response !== 'undefined') {
-              bot_msg = response.response;
-            }
-            addBotMessage(bot_msg);
-          } else if (this.readyState == 4 && this.status !== 200) {
-            bot_msg = botErrors.NO_CONNECTION;
-            addBotMessage(bot_msg);
-          }
-        };
-        xhttp.open('POST', url, true);
-        xhttp.setRequestHeader('Content-type', 'application/json; charset=UTF-8')
-        xhttp.send(json);
-      } catch (error) {
-        bot_msg = botErrors.NO_CONNECTION;
-        addBotMessage(bot_msg);
-        console.log(error.message)
-      }
-
-      /*fetch(url, {
+    function requestAnswer(data = []) {
+      fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       })
+        .then((response) => response.json())
         .then((data) => {
-          addBotMessage(data);
+          console.log("Bot got from the server: " + data);
         })
         .catch((error) => {
-          addBotMessage("API Error caused by Bot: "+ error);
-        });*/
+          console.error("API Error caused by Bot:", error);
+        });
     }
 
     function addUserMessage(data) {
@@ -424,15 +311,6 @@
 
     }
 
-    function addWaitingSpinner(parent) {
-      const spinner = document.createElement("div");
-      spinner.className="waiting";
-      // spinner.innerHTML = "<div class='waiting'><span></span><span></span><span></span></div>";
-      spinner.innerHTML = "<span></span><span></span><span></span>";
-      parent.appendChild(spinner);
-      return spinner;
-    }
-
     function addBotMessage(data) {
 
       let botMessage = document.createElement("div");
@@ -445,11 +323,10 @@
       botMessageContainer.className = "bot-message-container";
 
       let botMessageText = document.createElement("div");
-      botMessageText.className = "bot-message-text message";    //bot message text
-      botMessageText.textContent = data;
+      botMessageText.className = "bot-message-text message";    //bot message avatar
+      botMessageText.innerHTML = data;
 
       botMessage.appendChild(botMessageAvatar);
-      addWaitingSpinner(botMessage);
       botMessageContainer.appendChild(botMessageText);
       botMessage.appendChild(botMessageContainer);
 
@@ -457,7 +334,6 @@
 
       setTimeout(() => {
         userInput.disabled = false;
-        userInput.focus();
       }, 300);
 
     }
