@@ -103,10 +103,13 @@
     }
 
     .main-conversation {
+      overflow-y: auto;
       display: flex;
-      justify-content: space-between;
-      flex-direction: column;
+      flex-flow: column nowrap;
+      justify-content: end;
       gap: 1rem;
+      overflow-x: hidden;
+      max-height: calc(100% - 60px);
     }
 
     .bot-message {
@@ -175,6 +178,7 @@
       border-radius: 6px 0 0 6px;
       border: none;
       background-color: #fff;
+      outline: none;
     }
 
     .waiting {
@@ -296,20 +300,6 @@
     <main>
       <div class="main-container">
         <div class="main-conversation" id="js-main-conversation">
-
-          <!-- <div class="bot-message">
-            <div class="bot-message-avatar"></div>
-            <div class="waiting">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <div class="bot-message-container">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </div> -->
         </div>
         <div class="main-user-input">
           <div class="user-input-wrapper">
@@ -317,7 +307,7 @@
             <div class="user-input-button"></div>
           </div>
         </div>
-  </main>
+    </main>
   </div>
   <script>
     const url = "https://driving-tests.org/dmv-assistant.ai.php";
@@ -339,12 +329,14 @@
         .then((data) => {
           addBotMessageText(messageBox, inititalBotText);
           setTimeout(function () {
-            addBotMessage('What is your home state?');
+            addBotMessageText(addBotMessageLine(), 'What is your home state?')
           }, 1000);
         })
         .catch((error) => {
           addBotMessageText(messageBox, botErrors.BUSY);
-          enableUserInput();
+        })
+        .finally(() => {
+          enableUserInput()
         });
 
       userInput.addEventListener("keydown", (event) => {
@@ -353,10 +345,7 @@
           addUserMessage(userInput.value);
           let arrayOfMessages = getMessages();
 
-          setTimeout(() => {
-            userInput.value = "";
-            userInput.disabled = true;
-          }, 300);
+          disableUserInput()
 
           var json = JSON.stringify({ 'msg': arrayOfMessages });
           requestAnswer(json);
@@ -366,22 +355,22 @@
     });
 
     function requestAnswer(json) {
+      let messageBox = addBotMessageLine();
+      var bot_msg = botErrors.NO_CONNECTION;
 
       try {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             var response = JSON.parse(xhttp.responseText);
-            var bot_msg = '';
+
             if (typeof response.error !== 'undefined') {
               bot_msg = botErrors.NO_CONNECTION;
             } else if (typeof response.response !== 'undefined') {
               bot_msg = response.response;
             }
-            addBotMessage(bot_msg);
           } else if (this.readyState == 4 && this.status !== 200) {
             bot_msg = botErrors.NO_CONNECTION;
-            addBotMessage(bot_msg);
           }
         };
         xhttp.open('POST', url, true);
@@ -389,23 +378,12 @@
         xhttp.send(json);
       } catch (error) {
         bot_msg = botErrors.NO_CONNECTION;
-        addBotMessage(bot_msg);
         console.log(error.message)
+      } finally {
+        addBotMessageText(messageBox, bot_msg);
+        enableUserInput()
       }
 
-      /*fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-        .then((data) => {
-          addBotMessage(data);
-        })
-        .catch((error) => {
-          addBotMessage("API Error caused by Bot: "+ error);
-        });*/
     }
 
     function addUserMessage(data) {
@@ -428,34 +406,34 @@
       return spinner;
     }
 
-    function addBotMessage(data) {
+    // function addBotMessage(data) {
 
-      let botMessage = document.createElement("div");
-      botMessage.className = "bot-message";             //bot message container
+    //   let botMessage = document.createElement("div");
+    //   botMessage.className = "bot-message";             //bot message container
 
-      let botMessageAvatar = document.createElement("div");
-      botMessageAvatar.className = "bot-message-avatar"; //bot message avatar
+    //   let botMessageAvatar = document.createElement("div");
+    //   botMessageAvatar.className = "bot-message-avatar"; //bot message avatar
 
-      let botMessageContainer = document.createElement("div");
-      botMessageContainer.className = "bot-message-container";
+    //   let botMessageContainer = document.createElement("div");
+    //   botMessageContainer.className = "bot-message-container";
 
-      let botMessageText = document.createElement("div");
-      botMessageText.className = "bot-message-text message";    //bot message text
-      botMessageText.textContent = data;
+    //   let botMessageText = document.createElement("div");
+    //   botMessageText.className = "bot-message-text message";    //bot message text
+    //   botMessageText.textContent = data;
 
-      botMessage.appendChild(botMessageAvatar);
-      addWaitingSpinner(botMessage);
-      botMessageContainer.appendChild(botMessageText);
-      botMessage.appendChild(botMessageContainer);
+    //   botMessage.appendChild(botMessageAvatar);
+    //   addWaitingSpinner(botMessage);
+    //   botMessageContainer.appendChild(botMessageText);
+    //   botMessage.appendChild(botMessageContainer);
 
-      chatElements.insertBefore(botMessage, null);
+    //   chatElements.insertBefore(botMessage, null);
 
-      setTimeout(() => {
-        userInput.disabled = false;
-        userInput.focus();
-      }, 300);
+    //   setTimeout(() => {
+    //     userInput.disabled = false;
+    //     userInput.focus();
+    //   }, 300);
 
-    }
+    // }
 
     function getMessages() {
       let resultArray = [];
@@ -497,9 +475,15 @@
 
     function enableUserInput() {
       setTimeout(() => {
-        userInput
-          .disabled = false
-            .focus();
+        userInput.disabled = false;
+        userInput.focus();
+      }, 300);
+    }
+
+    function disableUserInput() {
+      setTimeout(() => {
+        userInput.value = "";
+        userInput.disabled = true;
       }, 300);
     }
 
