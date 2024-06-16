@@ -192,12 +192,11 @@
       align-items: center;
       text-align: center;
       display: flex;
-      display: none;
       /* background-color: red; */
     }
 
-    .display-flex {
-      display: flex;
+    .waiting.display-none {
+      display: none;
     }
 
     /* .waiting.noshadow {
@@ -312,18 +311,12 @@
             </div>
           </div> -->
         </div>
-      </div>
-      <!-- <div class="user-message-log" id="js-user-message-log">
-            <span class="user-message-log-text" id="js-user-message-log-text"></span>
-          </div> -->
-  </div>
-  <div class="main-user-input">
-    <div class="user-input-wrapper">
-      <input class="user-input-message" id="js-user-input-message" placeholder="Press Enter to continue" autocomplete="off">
-      <div class="user-input-button"></div>
-    </div>
-  </div>
-  </div>
+        <div class="main-user-input">
+          <div class="user-input-wrapper">
+            <input class="user-input-message" id="js-user-input-message" placeholder="Press Enter to continue" autocomplete="off">
+            <div class="user-input-button"></div>
+          </div>
+        </div>
   </main>
   </div>
   <script>
@@ -340,15 +333,18 @@
 
     document.addEventListener("DOMContentLoaded", (event) => {
 
+      let messageBox = addBotMessageLine();
+
       fetch(url)
         .then((data) => {
-          addBotMessage(inititalBotText);
+          addBotMessageText(messageBox, inititalBotText);
           setTimeout(function () {
             addBotMessage('What is your home state?');
           }, 1000);
         })
         .catch((error) => {
-          addBotMessage(botErrors.BUSY);
+          addBotMessageText(messageBox, botErrors.BUSY);
+          enableUserInput();
         });
 
       userInput.addEventListener("keydown", (event) => {
@@ -426,8 +422,7 @@
 
     function addWaitingSpinner(parent) {
       const spinner = document.createElement("div");
-      spinner.className="waiting";
-      // spinner.innerHTML = "<div class='waiting'><span></span><span></span><span></span></div>";
+      spinner.className = "waiting";
       spinner.innerHTML = "<span></span><span></span><span></span>";
       parent.appendChild(spinner);
       return spinner;
@@ -473,6 +468,39 @@
       }
       console.log(resultArray);
       return resultArray;
+    }
+
+    function hideMessageLoading(parent) {
+      let loadingID = parent.querySelector("div.waiting");
+      loadingID.classList.add("display-none")
+    }
+
+    function addBotMessageLine() {
+      let botMessage = document.createElement("div");
+      botMessage.className = "bot-message";             //bot message container
+      innerHTML = '<div class="bot-message-avatar"></div>'
+      innerHTML += '<div class="waiting"><span></span><span></span><span></span></div>'
+      botMessage.innerHTML = innerHTML;
+      chatElements.insertBefore(botMessage, null);
+      return botMessage;
+    }
+
+    function addBotMessageText(parent, messageText) {
+      let botMessageContainer = document.createElement("div");
+      botMessageContainer.className = "bot-message-container";
+      botMessageContainer.innerHTML = `<div class="bot-message-text message">${messageText}</div>`;
+      setTimeout(() => {
+        hideMessageLoading(parent);
+        parent.appendChild(botMessageContainer);
+      }, 1000)
+    }
+
+    function enableUserInput() {
+      setTimeout(() => {
+        userInput
+          .disabled = false
+            .focus();
+      }, 300);
     }
 
   </script>
