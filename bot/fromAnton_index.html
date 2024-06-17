@@ -91,25 +91,16 @@
       display: flex;
       height: 100%;
       width: 100%;
-      padding: 2% 15% 2% 15%;
+      padding: 2% 5% 2% 3%;
       justify-content: space-between;
       flex-direction: column;
     }
 
-    @media screen and (max-width: 768px) {
-      .main-container {
-        padding: 2% 5% 2% 5%;
-      }
-    }
-
     .main-conversation {
-      overflow-y: auto;
       display: flex;
-      flex-flow: column nowrap;
-      justify-content: end;
+      justify-content: space-between;
+      flex-direction: column;
       gap: 1rem;
-      overflow-x: hidden;
-      max-height: calc(100% - 60px);
     }
 
     .bot-message {
@@ -146,7 +137,7 @@
       border: 2px solid #E0E1E5;
     }
 
-    .user-message {
+    .user-message-log {
       position: relative;
       vertical-align: middle;
       text-align: right;
@@ -154,7 +145,7 @@
       margin-left: auto;
     }
 
-    .user-message-text {
+    .user-message-log-text {
       background: #DDDDDD;
       box-shadow: none;
       border: 2px solid #E0E1E5;
@@ -162,17 +153,6 @@
       font-weight: bold;
       border-radius: 20px;
       color: rgba(63, 63, 63, .9);
-    }
-
-    .user-input-wrapper {
-      padding-left: 35%;
-    }
-
-    @media screen and (max-width: 768px) {
-      .user-input-wrapper {
-        padding: 0;
-        display: flex;
-      }
     }
 
     .user-input-message {
@@ -189,90 +169,6 @@
       border-radius: 6px 0 0 6px;
       border: none;
       background-color: #fff;
-      outline: none;
-    }
-
-    .user-input-button {
-      font-weight: bold;
-      display: none;
-      align-items: center;
-      /* width: 40px; */
-      padding: 0 10px;
-      height: 55px;
-      border-radius: 0 6px 6px 0;
-      cursor: pointer;
-      background-color: #ECEFF1;
-      text-align: center;
-      font-size: 20px;
-      display: none;
-      text-transform: uppercase;
-    }
-
-    @media screen and (max-width: 768px) {
-      .user-input-button {
-        display: inline-flex;
-      }
-
-      .user-input-message {
-        border: 2px solid #e0e0e0;
-      }
-    }
-
-    .waiting {
-      /* position: absolute; */
-      top: 0;
-      left: 0;
-      width: 50px;
-      height: 50px;
-      visibility: visible;
-      background-color: #fff;
-      border-radius: 5px;
-      -webkit-box-shadow: none;
-      -moz-box-shadow: none;
-      box-shadow: none;
-      align-items: center;
-      text-align: center;
-      display: flex;
-      /* background-color: red; */
-    }
-
-    .waiting.display-none {
-      display: none;
-    }
-
-    .waiting span {
-      /* font-size: 48px; */
-      background-color: #434651;
-      animation-name: blink;
-      animation-duration: 1.4s;
-      animation-iteration-count: infinite;
-      animation-fill-mode: both;
-      height: 6px;
-      width: 6px;
-      margin: 2.5px;
-      border-radius: 50%;
-    }
-
-    .waiting span:nth-child(2) {
-      animation-delay: .2s;
-    }
-
-    .waiting span:nth-child(3) {
-      animation-delay: .4s;
-    }
-
-    @keyframes blink {
-      0% {
-        opacity: .2;
-      }
-
-      20% {
-        opacity: 1;
-      }
-
-      100% {
-        opacity: .2;
-      }
     }
   </style>
   <div class="body-container">
@@ -331,46 +227,45 @@
     <main>
       <div class="main-container">
         <div class="main-conversation" id="js-main-conversation">
+          <!-- <div class="bot-message">
+            <div class="bot-message-avatar"></div>
+            <div class="bot-message-container">
+              <div class="bot-message-text" id="js-bot-message-text"></div>
+              <div class="bot-message-feedback-button"></div>
+            </div>
+          </div> -->
+          <!-- <div class="user-message-log" id="js-user-message-log">
+            <span class="user-message-log-text" id="js-user-message-log-text"></span>
+          </div> -->
         </div>
-        <!-- <span>## dfg</span> -->
         <div class="main-user-input">
           <div class="user-input-wrapper">
-            <input class="user-input-message" id="js-user-input-message" placeholder="Type your message" autocomplete="off" disabled>
-            <span class="user-input-button" id="js-user-input-button">send</span>
+            <input class="user-input-message" id="js-user-input-message" placeholder="Press Enter to continue" autocomplete="off">
+            <div class="user-input-button"></div>
           </div>
         </div>
+      </div>
     </main>
   </div>
   <script>
     const url = "https://driving-tests.org/dmv-assistant.ai.php";
-    const botErrors = {
-      BUSY: "Sorry, i'm currently busy. Please come back later.",
-      NO_CONNECTION: "Sorry, i have encountered a problem when trying to connect to the server. Please come back later."
-    }
-    let inititalBotText = "Hey, I'm Ellie! I'll be your virtual guide today. I can answer anything you need to know before you head to the DMV to get your learner's permit or driver's license. To get started, I just need to ask a few questions.";
+    const inititalBotText = "Hey, I'm Ellie! I'll be your virtual guide today. I can answer anything you need to know before you head to the DMV to get your learner's permit or driver's license. To get started, I just need to ask a few questions.";
+    let data = [
+      { role: "assistant", content: "Hello user!" },
+      { role: "user", content: "Hello bot!" },
+    ];
     let apiGetResults = "";
 
+    // let messageBox = document.getElementById("js-bot-message-text");
     let userInput = document.getElementById("js-user-input-message");
     let chatElements = document.getElementById("js-main-conversation");
-    let userInputButtonId = document.getElementById("js-user-input-button");
 
     document.addEventListener("DOMContentLoaded", (event) => {
 
-      let messageBox = addBotMessageLine();
-
-      fetch(url)
-        .then((data) => {
-          addBotMessageText(messageBox, inititalBotText);
-          setTimeout(function () {
-            addBotMessageText(addBotMessageLine(), 'What is your home state?')
-          }, 1000);
-        })
-        .catch((error) => {
-          addBotMessageText(messageBox, botErrors.BUSY);
-        })
-        .finally(() => {
-          // enableUserInput()
-        });
+      addBotMessage(inititalBotText);
+      setTimeout(function(){
+        addBotMessage('What is your home state?');
+      }, 1000);
 
       userInput.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
@@ -378,71 +273,90 @@
           addUserMessage(userInput.value);
           let arrayOfMessages = getMessages();
 
-          disableUserInput()
+          setTimeout(() => {
+            userInput.value = "";
+            userInput.disabled = true;
+          }, 300);
 
-          var json = JSON.stringify({ 'msg': arrayOfMessages });
+          var json = JSON.stringify({'msg': arrayOfMessages});
           requestAnswer(json);
         }
       });
-
-      userInputButtonId.addEventListener("click", (event) => {
-          if (!userInput.value) return;
-          addUserMessage(userInput.value);
-          let arrayOfMessages = getMessages();
-
-          disableUserInput()
-
-          var json = JSON.stringify({ 'msg': arrayOfMessages });
-          requestAnswer(json);
-      });
-
-
 
     });
 
     function requestAnswer(json) {
-      let messageBox = addBotMessageLine();
-      var bot_msg = "";
+
 
       var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function () {
+      xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           var response = JSON.parse(xhttp.responseText);
-
-          if (typeof response.error !== 'undefined') {
-            bot_msg = botErrors.NO_CONNECTION;
-          } else if (typeof response.response !== 'undefined') {
+          var bot_msg = '';
+          if(typeof response.error !== 'undefined'){
+            bot_msg = response.error;
+          }else if(typeof response.response !== 'undefined'){
             bot_msg = response.response;
           }
-        } else if (this.readyState == 4 && this.status !== 200) {
-          bot_msg = botErrors.NO_CONNECTION;
+          addBotMessage(bot_msg);
         }
-        if (bot_msg) addBotMessageText(messageBox, bot_msg);
       };
       xhttp.open('POST', url, true);
       xhttp.setRequestHeader('Content-type', 'application/json; charset=UTF-8')
       xhttp.send(json);
 
+      /*fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((data) => {
+          addBotMessage(data);
+        })
+        .catch((error) => {
+          addBotMessage("API Error caused by Bot: "+ error);
+        });*/
     }
 
     function addUserMessage(data) {
 
       let userMessages = document.createElement("span");
       userMessages.textContent = data;
-      userMessages.className = "user-message-text message";
+      userMessages.className = "user-message-log-text message";
       let userMessageLogContainer = document.createElement("div");
-      userMessageLogContainer.className = "user-message";
+      userMessageLogContainer.className = "user-message-log";
       userMessageLogContainer.appendChild(userMessages);
       chatElements.insertBefore(userMessageLogContainer, null);
 
     }
 
-    function addWaitingSpinner(parent) {
-      const spinner = document.createElement("div");
-      spinner.className = "waiting";
-      spinner.innerHTML = "<span></span><span></span><span></span>";
-      parent.appendChild(spinner);
-      return spinner;
+    function addBotMessage(data) {
+
+      let botMessage = document.createElement("div");
+      botMessage.className = "bot-message";             //bot message container
+
+      let botMessageAvatar = document.createElement("div");
+      botMessageAvatar.className = "bot-message-avatar"; //bot message avatar
+
+      let botMessageContainer = document.createElement("div");
+      botMessageContainer.className = "bot-message-container";
+
+      let botMessageText = document.createElement("div");
+      botMessageText.className = "bot-message-text message";    //bot message avatar
+      botMessageText.textContent = data;
+
+      botMessage.appendChild(botMessageAvatar);
+      botMessageContainer.appendChild(botMessageText);
+      botMessage.appendChild(botMessageContainer);
+
+      chatElements.insertBefore(botMessage, null);
+
+      setTimeout(() => {
+        userInput.disabled = false;
+      }, 300);
+
     }
 
     function getMessages() {
@@ -456,47 +370,6 @@
       }
       console.log(resultArray);
       return resultArray;
-    }
-
-    function hideMessageLoading(parent) {
-      let loadingID = parent.querySelector("div.waiting");
-      loadingID.classList.add("display-none")
-    }
-
-    function addBotMessageLine() {
-      disableUserInput();
-      let botMessage = document.createElement("div");
-      botMessage.className = "bot-message";             //bot message container
-      innerHTML = '<div class="bot-message-avatar"></div>'
-      innerHTML += '<div class="waiting"><span></span><span></span><span></span></div>'
-      botMessage.innerHTML = innerHTML;
-      chatElements.insertBefore(botMessage, null);
-      return botMessage;
-    }
-
-    function addBotMessageText(parent, messageText) {
-      let botMessageContainer = document.createElement("div");
-      botMessageContainer.className = "bot-message-container";
-      botMessageContainer.innerHTML = `<div class="bot-message-text message">${messageText}</div>`;
-      setTimeout(() => {
-        hideMessageLoading(parent);
-        parent.appendChild(botMessageContainer);
-        enableUserInput()
-      }, 1000)
-    }
-
-    function enableUserInput() {
-      setTimeout(() => {
-        userInput.disabled = false;
-        userInput.focus();
-      }, 300);
-    }
-
-    function disableUserInput() {
-      setTimeout(() => {
-        userInput.value = "";
-        userInput.disabled = true;
-      }, 300);
     }
 
   </script>
