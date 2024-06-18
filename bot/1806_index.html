@@ -115,18 +115,6 @@
       padding-right: 1rem;
     }
 
-    /* .main-conversation > :first-child {
-      margin-bottom: auto !important;
-    } */
-
-    /* .main-conversation-wrapper {
-      position: relative;
-      display: flex;
-      height: 100%;
-      max-height: calc(100% - 60px);
-      overflow-y: scroll;
-    } */
-
     .main-user-input {
       padding-right: 1rem;
     }
@@ -134,6 +122,30 @@
     .bot-message {
       display: flex;
       width: 100%;
+    }
+
+    .bot-message .html ol, .bot-message .html ul {
+      margin: 10px 0 10px 30px;
+    }
+    .bot-message .html h1, .bot-message .html h2, .bot-message .html h3 {
+      margin: 0 0 16px;
+    }
+    .bot-message .html li {
+      margin: 0 0 10px;
+    }
+    .bot-message .html {
+      margin: 20px 0;
+      padding: 20px 15px;
+      background-color: #f8f8f8;
+      border-radius: 5px;
+    }
+    .bot-message .html a {
+      color: #007aff;
+      text-decoration: none;
+      border-bottom: 1px solid #007aff;
+    }
+    .bot-message .html a:visited {
+      color: #007aff;
     }
 
     .bot-message-avatar {
@@ -240,7 +252,6 @@
     }
 
     .waiting {
-      /* position: absolute; */
       top: 0;
       left: 0;
       width: 50px;
@@ -254,7 +265,6 @@
       align-items: center;
       text-align: center;
       display: flex;
-      /* background-color: red; */
     }
 
     .waiting.display-none {
@@ -262,7 +272,6 @@
     }
 
     .waiting span {
-      /* font-size: 48px; */
       background-color: #434651;
       animation-name: blink;
       animation-duration: 1.4s;
@@ -580,9 +589,11 @@
           let length = arrayOfStrings.length;
           if (length > 1) {
             addBotMessageText(messageBox, arrayOfStrings[0]);
-            for (let i = 1; i <= length; i ++) {
-              let messageBox = addBotMessageLine();
-              addBotMessageText(messageBox, arrayOfStrings[i]);
+            for (let i = 1; i < length; i ++) {
+              setTimeout(() => {
+                let messageBox = addBotMessageLine();
+                addBotMessageText(messageBox, arrayOfStrings[i]);
+              }, 1000);
             }
           } else {
             addBotMessageText(messageBox, bot_msg);
@@ -654,12 +665,10 @@
       let botMessageContainer = document.createElement("div");
       botMessageContainer.className = "bot-message-container";
       botMessageContainer.innerHTML = `<div class="bot-message-text message">${messageText}</div>`;
-      setTimeout(() => {
-        hideMessageLoading(parent);
-        parent.appendChild(botMessageContainer);
-        scrollConversation();
-        enableUserInput();
-      }, 1000)
+      hideMessageLoading(parent);
+      parent.appendChild(botMessageContainer);
+      scrollConversation();
+      enableUserInput();
     }
 
     function enableUserInput() {
@@ -670,10 +679,8 @@
     }
 
     function disableUserInput() {
-      setTimeout(() => {
         userInput.value = "";
         userInput.disabled = true;
-      }, 300);
     }
 
     function scrollConversation() {
@@ -698,6 +705,7 @@
         });
     }
   </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"895c3984fda548c7","version":"2024.4.1","token":"030b21693c6c4ad497e58daf693b5ef2"}' crossorigin="anonymous"></script>
 </body>
 
 </html>
