@@ -71,6 +71,7 @@
       align-items: center;
       height: 100%;
       width: 100%;
+      position: relative;
     }
 
     .header-about {
@@ -94,6 +95,7 @@
       padding: 2% 15% 2% 15%;
       justify-content: space-between;
       flex-direction: column;
+      gap: 1rem;
     }
 
     @media screen and (max-width: 768px) {
@@ -103,13 +105,30 @@
     }
 
     .main-conversation {
-      overflow-y: auto;
       display: flex;
       flex-flow: column nowrap;
-      justify-content: end;
+      width: 100%;
+      overflow-y: auto;
       gap: 1rem;
       overflow-x: hidden;
+      height: fit-content;
+      padding-right: 1rem;
+    }
+
+    /* .main-conversation > :first-child {
+      margin-bottom: auto !important;
+    } */
+
+    /* .main-conversation-wrapper {
+      position: relative;
+      display: flex;
+      height: 100%;
       max-height: calc(100% - 60px);
+      overflow-y: scroll;
+    } */
+
+    .main-user-input {
+      padding-right: 1rem;
     }
 
     .bot-message {
@@ -193,19 +212,21 @@
     }
 
     .user-input-button {
-      font-weight: bold;
+      /* font-weight: bold; */
       display: none;
       align-items: center;
       /* width: 40px; */
-      padding: 0 10px;
+      padding: 0 14px;
       height: 55px;
       border-radius: 0 6px 6px 0;
+      border: 2px solid #e0e0e0;
+      border-left: 0;
       cursor: pointer;
       background-color: #ECEFF1;
       text-align: center;
       font-size: 20px;
       display: none;
-      text-transform: uppercase;
+      /* text-transform: uppercase; */
     }
 
     @media screen and (max-width: 768px) {
@@ -274,6 +295,92 @@
         opacity: .2;
       }
     }
+
+    .burger-wrapper {
+      height: 100%;
+      width: auto;
+      display: flex;
+      position: absolute;
+      right: 20px;
+      align-items: center;
+    }
+
+    .burger {
+      display: flex;
+      vertical-align: middle;
+      box-sizing: content-box;
+      width: 40px;
+      height: 40px;
+      background-size: 25px 25px;
+      background-position: center;
+      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"><path style="fill:%231B2133;text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Bitstream Vera Sans" d="M 0 7.5 L 0 12.5 L 50 12.5 L 50 7.5 L 0 7.5 z M 0 22.5 L 0 27.5 L 50 27.5 L 50 22.5 L 0 22.5 z M 0 37.5 L 0 42.5 L 50 42.5 L 50 37.5 L 0 37.5 z" color="%23000" overflow="visible" enable-background="accumulate" font-family="Bitstream Vera Sans"></path></svg>');
+      background-repeat: no-repeat;
+      cursor: pointer;
+    }
+
+    .burger.menu-open {
+      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"><path style="fill:%231B2133;text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Bitstream Vera Sans" d="M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 L 9.15625 6.3125 z" color="%23000" overflow="visible" enable-background="accumulate" font-family="Bitstream Vera Sans"></path></svg>');
+    }
+
+    .chat-header-filler {
+      position: absolute;
+      box-sizing: content-box;
+      width: 100%;
+      background-color: #F8F8F8;
+      border-bottom: 2px solid #e8e8e8;
+      overflow: hidden;
+      z-index: 10;
+      max-height: 0;
+      transition: max-height .5s;
+    }
+
+    .chat-header-filler.menu-open {
+      max-height: 311px;
+    }
+
+    .menu-item {
+      text-align: center;
+      font-size: 17px;
+      margin-bottom: 20px;
+      color: #000;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .menu-item.start-over {
+      background-color: inherit;
+    }
+
+    .copyright {
+      text-align: center;
+      font-size: 14px;
+      color: #5b5f6e;
+      cursor: pointer;
+      text-decoration: none;
+      padding-top: 10px;
+    }
+
+    .terms {
+      padding-top: 20px;
+      padding-bottom: 10px;
+    }
+
+    .terms-item {
+      text-align: center;
+      font-size: 14px;
+      color: #5b5f6e;
+      cursor: pointer;
+      text-decoration: underline;
+      margin-bottom: 10px;
+    }
+
+    .disclaimer {
+      padding: 0 5px 10px;
+      text-align: center;
+      font-size: 14px;
+      color: #5b5f6e;
+    }
   </style>
   <div class="body-container">
     <header>
@@ -326,13 +433,33 @@
           </svg>
           <span>dmv assistant</span>
         </a>
+        <div class="burger-wrapper">
+          <div id="js-burger" class="burger"></div>
+        </div>
+      </div>
+      <!-- <div class="chat-header-filler" style="height: 300.719px;"> -->
+      <div class="chat-header-filler" id="js-chat-header-filler">
+
+        <div class="menu-content" style="margin-top: 20.7188px;">
+          <ul class="menu">
+            <li class="menu-item start-over" id="js-start-over">Start Over</li>
+            <li class="menu-item"><a href="https://driving-tests.org/dmv-assistant/#about" style="color: inherit;text-decoration: none;" target="_blank">About</a></li>
+            <li class="menu-item"><a href="https://driving-tests.org/dmv-assistant/#how" style="color: inherit;text-decoration: none;" target="_blank">How it works</a></li>
+          </ul>
+          <div class="copyright"><a href="https://elegantelearning.com/" style="color: inherit;text-decoration: none;" target="_blank">© 2018 Elegant E-Learning, Inc.</a></div>
+          <div class="terms">
+            <div class="terms-item"><a href="legal/terms.html" style="color: inherit;text-decoration: none;" target="_blank">Terms of use</a></div>
+            <div class="terms-item"><a href="legal/privacy.html" style="color: inherit;text-decoration: none;" target="_blank">Privacy policy</a></div>
+          </div>
+          <div class="disclaimer">Driving-Tests.org is a privately owned website that is not affiliated with or operated by any state government agency.</div>
+        </div>
+
       </div>
     </header>
     <main>
       <div class="main-container">
         <div class="main-conversation" id="js-main-conversation">
         </div>
-        <!-- <span>## dfg</span> -->
         <div class="main-user-input">
           <div class="user-input-wrapper">
             <input class="user-input-message" id="js-user-input-message" placeholder="Type your message" autocomplete="off" disabled>
@@ -353,24 +480,13 @@
     let userInput = document.getElementById("js-user-input-message");
     let chatElements = document.getElementById("js-main-conversation");
     let userInputButtonId = document.getElementById("js-user-input-button");
+    let burger = document.getElementById("js-burger");
+    let menu = document.getElementById("js-chat-header-filler");
+    let startOver = document.getElementById("js-start-over");
 
     document.addEventListener("DOMContentLoaded", (event) => {
 
-      let messageBox = addBotMessageLine();
-
-      fetch(url)
-        .then((data) => {
-          addBotMessageText(messageBox, inititalBotText);
-          setTimeout(function () {
-            addBotMessageText(addBotMessageLine(), 'What is your home state?')
-          }, 1000);
-        })
-        .catch((error) => {
-          addBotMessageText(messageBox, botErrors.BUSY);
-        })
-        .finally(() => {
-          // enableUserInput()
-        });
+      onLoadChat();
 
       userInput.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
@@ -385,19 +501,26 @@
         }
       });
 
+      startOver.addEventListener("click", (event) => {
+        chatElements.innerHTML="";
+        onLoadChat();
+      })
+
       userInputButtonId.addEventListener("click", (event) => {
-          if (!userInput.value) return;
-          addUserMessage(userInput.value);
-          let arrayOfMessages = getMessages();
+        if (!userInput.value) return;
+        addUserMessage(userInput.value);
+        let arrayOfMessages = getMessages();
 
-          disableUserInput()
+        disableUserInput()
 
-          var json = JSON.stringify({ 'msg': arrayOfMessages });
-          requestAnswer(json);
+        var json = JSON.stringify({ 'msg': arrayOfMessages });
+        requestAnswer(json);
       });
 
-
-
+      burger.addEventListener("click", (event) => {
+        burger.classList.toggle("menu-open");
+        menu.classList.toggle("menu-open");
+      })
     });
 
     function requestAnswer(json) {
@@ -434,7 +557,7 @@
       userMessageLogContainer.className = "user-message";
       userMessageLogContainer.appendChild(userMessages);
       chatElements.insertBefore(userMessageLogContainer, null);
-
+      scrollConversation();
     }
 
     function addWaitingSpinner(parent) {
@@ -471,6 +594,7 @@
       innerHTML += '<div class="waiting"><span></span><span></span><span></span></div>'
       botMessage.innerHTML = innerHTML;
       chatElements.insertBefore(botMessage, null);
+      scrollConversation();
       return botMessage;
     }
 
@@ -481,7 +605,8 @@
       setTimeout(() => {
         hideMessageLoading(parent);
         parent.appendChild(botMessageContainer);
-        enableUserInput()
+        scrollConversation();
+        enableUserInput();
       }, 1000)
     }
 
@@ -499,6 +624,27 @@
       }, 300);
     }
 
+    function scrollConversation() {
+      chatElements.scrollTop = chatElements.scrollHeight;
+    }
+
+    function onLoadChat() {
+      let messageBox = addBotMessageLine();
+
+      fetch(url)
+        .then((data) => {
+          addBotMessageText(messageBox, inititalBotText);
+          setTimeout(function () {
+            addBotMessageText(addBotMessageLine(), 'What is your home state?')
+          }, 1000);
+        })
+        .catch((error) => {
+          addBotMessageText(messageBox, botErrors.BUSY);
+        })
+        .finally(() => {
+          // enableUserInput()
+        });
+    }
   </script>
 </body>
 
