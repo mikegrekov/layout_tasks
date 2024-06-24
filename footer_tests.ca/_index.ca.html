@@ -86,7 +86,8 @@
         #header>.container,
         #footer>.container {
             padding-left: 15px;
-            padding-right: 15px
+            padding-right: 15px;
+            width: 100vw;
         }
 
         @media(min-width:992px) {
@@ -2758,11 +2759,11 @@
 
         #footer>.container {
             display: flex;
-            padding: 32px 0px;
+            padding: 32px 10px;
             flex-direction: column;
             align-items: flex-start;
             gap: 20px;
-            max-width: 940px;
+            max-width: 960px;
             box-sizing: border-box;
         }
 
@@ -2791,13 +2792,12 @@
 
         /* .footer-nav dt { */
         footer dt {
-            /* color: #f2f2f7;
-            font-size: 16px;
+            color: #f2f2f7;
+            /* font-size: 16px;
             font-weight: 600;
             line-height: 20px;
             margin-bottom: 25px; */
 
-            color: var(--Light-Background-Setting, var(--bg-SettingDarker, #1c1c1c));
             font-size: 18px;
             font-style: normal;
             font-weight: 600;
@@ -3006,7 +3006,6 @@
 
         .footer-ee-network dd {
             float: left;
-            /* margin-right: 19px !important; MG */
         }
 
         .footer-ee-network dd a {
@@ -3144,7 +3143,7 @@
 
         .footer-nav-container dt {
             margin-bottom: 8px;
-            color: var(--Light-Background-Setting, var(--bg-SettingDarker, #1c1c1c));
+            /* color: var(--Light-Background-Setting, var(--bg-SettingDarker, #1c1c1c)); */
         }
 
         .col-33 {
@@ -3171,34 +3170,92 @@
             display: none;
         }
 
-        @media (max-width: 414px) {
-            #footer>.container p:nth-child(1) {order: 5;}
-            #footer>.container div:nth-child(2) {display: none;}
-            #footer>.container div:nth-child(3) {order: 1;}
-            #footer>.container div:nth-child(4) {order: 2;}
-            #footer>.container dl:nth-child(5) {order: 3;}
-            #footer>.container div:nth-child(6) {order: 4;}
-            #footer>.container div:nth-child(7) {order: 7;}
+        .footer-lower dl:nth-child(7),
+        .facebook-logo,
+        .twitter-logo {
+            display: none
+        }
 
-            /* #footer>.container {
-                display: grid;
-            } */
-            #footer dt {
-                color: var(--text-Body, #A8A8AE);
+        #driving-statistics {
+            margin-bottom: 20px;
+        }
+
+        #network-links {
+            display: flex; 
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        #network-links dd {
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            #footer>.container {
+                margin-left: 0;
             }
 
+            .footer-lower {
+                align-items: center;
+            }
+
+            .footer-lower dl {
+                padding-top: 0;
+            }
+
+            .footer-lower dl:nth-child(6) {
+                flex: 1 0 0;
+            }
+        }
+
+        @media (max-width: 440px) {
+            #footer>.container p:nth-child(1) {
+                order: 5;
+                line-height: 135%;
+            }
+
+            #footer>.container div:not(#network-links):nth-child(2) {
+                display: none;
+            }
+
+            #footer>.container div:nth-child(3) {
+                order: 1;
+            }
+
+            #footer>.container div:nth-child(4) {
+                order: 2;
+            }
+
+            #footer>.container dl:nth-child(5) {
+                order: 3;
+            }
+
+            #footer>.container div:nth-child(6) {
+                order: 4;
+            }
+
+            #footer>.container div:nth-child(7) {
+                order: 7;
+            }
+
+            /* #footer dt {
+                color: var(--text-Body, #A8A8AE);
+            } */
+
             .footer-nav-container {
-                grid-template-columns: 156px 156px;
+                grid-template-columns: 1fr 1fr;
                 gap: 20px 24px;
             }
 
             #footer>.container {
                 display: flex;
-                width: 375px;
+                max-width: 375px;
                 padding: 28px 20px;
                 align-items: flex-start;
                 margin: 0 auto;
             }
+
             #footer {
                 width: 100vw;
             }
@@ -3214,40 +3271,87 @@
                 font-size: 16px;
                 font-style: normal;
                 font-weight: 700;
-                line-height: 115%; /* 18.4px */
+                line-height: 115%;
             }
+
+            .footer-nav-container dd {
+                margin-bottom: 0;
+            }
+
+            #driving-statistics,
+            .col-33 dd:not(:last-child) {
+                margin-bottom: 12px;
+            }
+
             .col-12.footer-ee-network>div {
                 align-items: flex-start;
                 flex-wrap: wrap;
             }
+
             .footer-ee-network dd a {
                 text-align: center;
                 font-family: "Nordique Pro";
                 font-size: 15px;
                 font-style: normal;
                 font-weight: 400;
-                line-height: 150%; /* 22.5px */
+                line-height: 150%;
                 letter-spacing: 0.3px;
             }
-            .footer-ee-network dt
-            {
+
+            .footer-ee-network dt {
                 font-size: 14px;
                 font-style: normal;
                 font-weight: 600;
-                line-height: 135%; /* 18.9px */
+                line-height: 135%;
             }
 
             .footer-lower .col-6 {
                 display: none;
             }
-            .footer-lower dl:nth-child(2) {order: 1}
-            .footer-lower dl:nth-child(3) {order: 4}
-            .footer-lower dl:nth-child(4) {order: 2}
-            .footer-lower dl:nth-child(5) {order: 5 !important;}
-            .footer-lower dl:nth-child(6) {order: 3}
 
-            .footer-lower{
-                /* display: grid; */
+            .footer-lower dl {
+                padding-top: 0;
+            }
+            /* help center */
+            .footer-lower dl:nth-child(2) {
+                order: 1;
+                padding-top: 0;
+                /* margin-top: -4px; */
+            }
+           /* terms and privacy */
+            .footer-lower dl:nth-child(3) {
+                order: 7;
+                flex: 1 0 0;
+            }
+            /* sitemap */
+            .footer-lower dl:nth-child(4) {
+                order: 2
+            }
+            /* all rights */
+            .footer-lower dl:nth-child(5) {
+                order: 8 !important;
+                margin-left: 88px;
+                margin-top: -20px;
+            }
+            /* mobile */            
+            .footer-lower dl:nth-child(6) {
+                order: 3;
+                flex: 0;
+            }
+            /* the last line */
+            .footer-lower dl:nth-child(7) {
+                order: 4;
+                display: block;
+            }
+            /* facebook */
+            .footer-lower dl:nth-child(8) {
+                order: 5;
+                display: block;
+            }
+            /* twitter */
+            .footer-lower dl:nth-child(9) {
+                order: 6;
+                display: block
             }
         }
     </style>
@@ -3273,7 +3377,7 @@
                 <dl class="col-33">
                     <dt>Resources</dt>
                     <dd><a href="https://tests.ca/library/" class="ui-link">For libraries</a></dd>
-                    <dd style="margin-bottom: 20px;"><a href="https://tests.ca/driving-statistics/" target="_blank" class="ui-link">Driving statistics</a></dd>
+                    <dd id="driving-statistics"><a href="https://tests.ca/driving-statistics/" target="_blank" class="ui-link">Driving statistics</a></dd>
                     <dd><a href="https://driving-tests.org/vin-decoder/" target="_blank" class="ui-link">VIN decoder</a></dd>
                     <dd style="margin-bottom: 0;"><a href="https://tests.ca/beginner-drivers/" target="_blank" class="ui-link">Beginner driver's guide</a></dd>
                 </dl>
@@ -3281,7 +3385,7 @@
             <div class="footer-line"></div>
             <dl class="col-12 footer-ee-network" style="margin-bottom: 0px;">
                 <dt> The Elegant E-Learning Network</dt>
-                <div style="display: flex; justify-content: space-between;">
+                <div id="network-links">
                     <dd> <a href="https://toptests.co.uk/" target="_blank">TopTests</a></dd>
                     <dd> <a href="https://www.g1.ca/" target="_blank">G1.ca</a></dd>
                     <dd> <a href="https://driving-tests.org/" target="_blank">Driving-Tests.org</a></dd>
@@ -3296,7 +3400,7 @@
                 <dl class="col-6">
                     <a id="logo" href="/">Tests.ca</a>
                 </dl>
-                <dl style="flex: 1 0 0;">
+                <dl style="flex: 1 0 0; min-width: 102px;">
                     <a href="/">
                         <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g id="24">
@@ -3314,7 +3418,7 @@
                     <dd> <a href="/about/terms-of-use/">Terms and Privacy Policy</a></dd>
                 </dl>
                 <dl>
-                    <dd><a href="">Sitemap</a></dd>
+                    <dd><a href="https://tests.org/sitemap/">Sitemap</a></dd>
                 </dl>
                 <dl>
                     <dd>© 2010-2024 All rights reserved.</dd>
@@ -3322,6 +3426,33 @@
                 <dl>
                     <dd><a href="https://m.tests.ca/" target="_blank">Mobile</a></dd>
                 </dl>
+                <dl class="footer-line" style="padding: 0;"></dl>
+                <dl class="facebook-logo" style="padding: 0;">
+                    <a href="https://facebook.com/" target="_blank">
+                        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="Group">
+                                <g id="Group_2">
+                                    <path id="Vector" d="M21 0.169922H3C1.3455 0.169922 0 1.51542 0 3.16992V21.1699C0 22.8244 1.3455 24.1699 3 24.1699H12V15.9199H9V12.1699H12V9.16992C12 6.68442 14.0145 4.66992 16.5 4.66992H19.5V8.41992H18C17.172 8.41992 16.5 8.34192 16.5 9.16992V12.1699H20.25L18.75 15.9199H16.5V24.1699H21C22.6545 24.1699 24 22.8244 24 21.1699V3.16992C24 1.51542 22.6545 0.169922 21 0.169922Z" fill="#858595" fill-opacity="0.8" />
+                                </g>
+                            </g>
+                        </svg>
+                    </a>
+                </dl>
+                <dl class="twitter-logo" style="padding: 0;">
+                    <a href="https://twitter.com/" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,256,256" width="24px" height="24px">
+                            <g fill="#858595" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                                <path d="M38.4,256c-21.20773,0 -38.4,-17.19227 -38.4,-38.4v-179.2c0,-21.20773 17.19227,-38.4 38.4,-38.4h179.2c21.20773,0 38.4,17.19227 38.4,38.4v179.2c0,21.20773 -17.19227,38.4 -38.4,38.4z" id="shape"></path>
+                            </g>
+                            <g fill="#000000" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                                <g transform="scale(5.12,5.12)">
+                                    <path d="M5.91992,6l14.66211,21.375l-14.35156,16.625h3.17969l12.57617,-14.57812l10,14.57813h12.01367l-15.31836,-22.33008l13.51758,-15.66992h-3.16992l-11.75391,13.61719l-9.3418,-13.61719zM9.7168,8h7.16406l23.32227,34h-7.16406z"></path>
+                                </g>
+                            </g>
+                        </svg>
+                    </a>
+                </dl>
+
             </div>
             <!-- <nav class="footer-nav cols-row">
                 <dl class="col-6"> <a id="logo" href="/">Tests.ca</a>
