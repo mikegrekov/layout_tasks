@@ -1983,7 +1983,7 @@
                             z-index: 1;
                         }
 
-                        /* <style> */
+                        <style>
                         /*]]>*/
                     </style>
                     <section id="knowledge-test" class="feature-item yellow">
@@ -3057,7 +3057,6 @@
             .footer-nav dl.footer-ee-network {
                 margin-top: 20px;
             }
-
         }
 
         #breadcrumbs {
@@ -3166,93 +3165,9 @@
             margin-bottom: 14px;
             text-transform: capitalize;
         }
-
-        .footer-nav-container .footer-line {
-            display: none;
-        }
-
-        @media (max-width: 414px) {
-            #footer>.container p:nth-child(1) {order: 5;}
-            #footer>.container div:nth-child(2) {display: none;}
-            #footer>.container div:nth-child(3) {order: 1;}
-            #footer>.container div:nth-child(4) {order: 2;}
-            #footer>.container dl:nth-child(5) {order: 3;}
-            #footer>.container div:nth-child(6) {order: 4;}
-            #footer>.container div:nth-child(7) {order: 7;}
-
-            /* #footer>.container {
-                display: grid;
-            } */
-            #footer dt {
-                color: var(--text-Body, #A8A8AE);
-            }
-
-            .footer-nav-container {
-                grid-template-columns: 156px 156px;
-                gap: 20px 24px;
-            }
-
-            #footer>.container {
-                display: flex;
-                width: 375px;
-                padding: 28px 20px;
-                align-items: flex-start;
-                margin: 0 auto;
-            }
-            #footer {
-                width: 100vw;
-            }
-
-            .footer-nav-container .footer-line {
-                display: flex;
-                grid-column-start: 1;
-                grid-column-end: 3;
-                grid-row-start: 2;
-            }
-
-            .footer-nav-container dt {
-                font-size: 16px;
-                font-style: normal;
-                font-weight: 700;
-                line-height: 115%; /* 18.4px */
-            }
-            .col-12.footer-ee-network>div {
-                align-items: flex-start;
-                flex-wrap: wrap;
-            }
-            .footer-ee-network dd a {
-                text-align: center;
-                font-family: "Nordique Pro";
-                font-size: 15px;
-                font-style: normal;
-                font-weight: 400;
-                line-height: 150%; /* 22.5px */
-                letter-spacing: 0.3px;
-            }
-            .footer-ee-network dt
-            {
-                font-size: 14px;
-                font-style: normal;
-                font-weight: 600;
-                line-height: 135%; /* 18.9px */
-            }
-
-            .footer-lower .col-6 {
-                display: none;
-            }
-            .footer-lower dl:nth-child(2) {order: 1}
-            .footer-lower dl:nth-child(3) {order: 4}
-            .footer-lower dl:nth-child(4) {order: 2}
-            .footer-lower dl:nth-child(5) {order: 5 !important;}
-            .footer-lower dl:nth-child(6) {order: 3}
-
-            .footer-lower{
-                /* display: grid; */
-            }
-        }
     </style>
     <footer id="footer">
-        <div class="container" id="footer-container">
+        <div class="container">
             <p style="margin-bottom: 0;">Tests.ca is a privately owned website that is not affiliated with or operated by any government agency.</p>
             <div class="footer-line"></div>
             <div class="footer-nav-container">
@@ -3264,7 +3179,6 @@
                     <dt>Commercial</dt>
                     <dd><a href="https://tests.ca/cdl-premium/?from=footer-navigation&utm_source=cdl_desk_footer_nav&utm_medium=cdl-desk&utm_campaign=cdl-promo/" target=”_blank” class="ui-link">Upgrade to Premium</a></dd>
                 </dl>
-                <div class="footer-line"></div>
                 <dl class="col-33">
                     <dt>About</dt>
                     <dd><a href="/about/" class="ui-link">Who We Are</a></dd>
