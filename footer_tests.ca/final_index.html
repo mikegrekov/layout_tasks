@@ -1,0 +1,687 @@
+    <style>
+        @media(min-width:1200px) {
+
+            #footer>.container {
+                max-width: 960px !important
+                }
+            }
+
+            @media(min-width:1400px) {
+
+            #footer>.container {
+                max-width: 960px !important
+                }
+            }
+        #footer {
+            background-color: #000;
+            color: #8C8C9A;
+            font-size: 14px;
+            line-height: 17px;
+        }
+
+        #footer a {
+            color: #8C8C9A;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .sidebar-open #footer {
+            padding-right: 350px;
+        }
+
+        #footer>.container {
+            display: flex;
+            padding: 32px 20px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+            max-width: 960px;
+            box-sizing: border-box;
+            width: 100%;
+            min-width: 768px;
+        }
+
+        .footer-nav dl {
+            margin: 0;
+            padding: 0 10px;
+        }
+
+        .footer-nav dl:first-of-type {
+            padding-left: 0;
+        }
+
+        .footer-nav dl:last-of-type {
+            padding-right: 0;
+        }
+
+        footer dt {
+            color: #A8A8AE;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 150%;
+            margin-bottom: 8px;
+        }
+
+        .footer-nav dd {
+            margin: 0 0 10px;
+        }
+
+        .footer-nav dd a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        #footer #logo {
+            display: block;
+            width: 135px;
+            height: 40px;
+            text-decoration: none;
+            color: #fff;
+            white-space: nowrap;
+            background-image: url(https://tests.ca/img/logo-v2-white.svg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            text-indent: -9999px;
+            opacity: 0.6;
+        }
+
+        #footer .app-btns {
+            flex-grow: 1;
+        }
+
+        #footer .btn-app-store,
+        #footer .btn-google-play {
+            display: inline-block;
+            margin: 0;
+            background-color: transparent;
+            background-repeat: no-repeat;
+            background-size: cover;
+            overflow: hidden;
+            text-indent: -999px;
+            opacity: .6;
+            transition: opacity .3s;
+        }
+
+        #footer .btn-app-store {
+            width: 120px;
+            height: 40px;
+            background-image: url(https://tests.ca/img/t/app-store-grey_215x64.svg);
+            margin-right: 11px;
+        }
+
+        #footer .btn-google-play {
+            width: 135px;
+            height: 40px;
+            background-image: url(https://tests.ca/img/t/google-play-grey_215x64.svg);
+        }
+
+        #footer .btn-app-store:hover,
+        #footer .btn-google-play:hover {
+            opacity: 1;
+        }
+
+        #footer .footer-help {
+            display: inline-block;
+        }
+
+        #footer .footer-help svg.icon-footer-help {
+            display: inline-block;
+            vertical-align: middle;
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+        }
+
+        #footer .footer-help span {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        #footer .footer-nav {
+            padding-bottom: 40px;
+            position: relative;
+        }
+
+        #footer .footer-nav:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 0;
+            border-bottom: 1px solid #4B4B55;
+            opacity: 0.5;
+        }
+
+        .footer-lower {
+            align-items: center;
+        }
+
+        .footer-lower dl:last-of-type {
+            padding-right: 0;
+        }
+
+        .footer-lower dd {
+            margin: 0;
+        }
+
+        .footer-lower .share-btn {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+        }
+
+        .footer-lower .share-btn:first-of-type {
+            margin-right: 15px;
+        }
+
+        .footer-lower .share-btn:hover {
+            opacity: 1;
+        }
+
+        .cols-row {
+            display: flex;
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            -webkit-justify-content: space-between;
+            -ms-flex-pack: space-between;
+            -ms-justify-content: space-between;
+            justify-content: space-between;
+            gap: 10px 20px;
+            width: 100%;
+        }
+
+        .cols-row>* {
+            flex: 0 0 auto;
+            -ms-flex: 0 0 auto;
+            -webkit-flex: 0 0 auto;
+            box-sizing: border-box;
+        }
+
+        .col-3 {
+            flex-basis: 25%;
+            -ms-flex-basis: 25%;
+            -ms-flex-preferred-size: 25%;
+            -webkit-flex-basis: 25%;
+            max-width: 25%;
+        }
+
+        .col-6 {
+            display: flex;
+            width: 135px;
+            height: 40px;
+            padding: 6px 6px;
+            justify-content: center;
+            align-items: center;
+
+            gap: 4px;
+            margin-right: 10px;
+        }
+
+        @font-face {
+            font-display: swap;
+            font-family: 'npr4logo';
+            src: url('https://s.driving-tests.org/f/npr4logo.eot');
+            src: url('https://s.driving-tests.org/f/npr4logo.eot?#iefix') format('embedded-opentype'), url('https://s.driving-tests.org/f/npr4logo.woff2') format('woff2'), url('https://s.driving-tests.org/f/npr4logo.woff') format('woff'), url('https://s.driving-tests.org/f/npr4logo.ttf') format('truetype'), url('https://s.driving-tests.org/f/npr4logo.svg#NordiquePro-Regular') format('svg');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .footer-ee-network dd {
+            float: left;
+        }
+
+        .footer-ee-network dd a {
+            font-family: npr4logo !important;
+            font-weight: normal;
+            font-style: normal;
+            text-transform: lowercase;
+            letter-spacing: 0.4px;
+            font-size: 20px;
+            line-height: 30px;
+
+        }
+
+        .footer-nav dl.footer-ee-network {
+            width: 100%;
+            margin-top: 0;
+            padding-left: 0;
+        }
+
+        @media(max-width: 767px) {
+            #footer .footer-nav .col-6 {
+                width: 100%;
+                flex-basis: 100%;
+                max-width: 100%;
+            }
+
+            #footer .footer-nav .col-3 {
+                width: 50%;
+                flex-basis: 50%;
+                max-width: 50%;
+                padding: 0 10px 0 0;
+            }
+
+            #footer .footer-help {
+                margin: 30px 0 40px;
+            }
+
+            #footer .footer-lower .col-3 {
+                width: 50%;
+                flex-basis: 50%;
+                max-width: 50%;
+            }
+
+            #footer .footer-lower .col-3:last-of-type {
+                margin-left: auto;
+            }
+
+            .footer-nav dl.footer-ee-network {
+                margin-top: 20px;
+            }
+
+        }
+
+        #breadcrumbs {
+            /*background:#888;color:#999;*/
+            color: #888;
+            font-size: 13px;
+        }
+
+        .sidebar-open #breadcrumbs {
+            padding-right: 350px;
+        }
+
+        #breadcrumbs .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 10px 15px 20px;
+            box-sizing: border-box;
+        }
+
+        #bcrumbs {
+            margin: 0;
+            padding: 0;
+            display: block;
+            float: none;
+            clear: both;
+            /*border:#646464 solid;border-width: 0 0 1px;*/
+        }
+
+        #bcrumbs ul,
+        #bcrumbs li {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #bcrumbs li {
+            float: left;
+        }
+
+        #bcrumbs li a,
+        #bcrumbs li a:link {
+            /*color:#bdbdbd;*/
+            color: #444;
+            text-decoration: none;
+        }
+
+        #bcrumbs li.sep {
+            margin: 0 5px;
+        }
+
+        #bcrumbs li span.current a,
+        #bcrumbs li span.current a:link {
+            color: #888;
+        }
+
+        @media (max-width: 1130px) {
+            #breadcrumbs {
+                padding-right: 0 !important;
+            }
+        }
+
+        .night-mode #bcrumbs li a,
+        .night-mode #bcrumbs li a:link {
+            color: #7c7c91;
+        }
+
+        .night-mode #bcrumbs li span.current a,
+        .night-mode #bcrumbs li span.current a:link {
+            color: #7c7c91;
+        }
+
+        .footer-line {
+            width: 100%;
+            height: 1px;
+            background-color: #a8a8ae;
+        }
+
+        .footer-nav-container {
+            display: grid;
+            gap: 20px;
+            width: 100%;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+
+        .footer-nav-container dt {
+            margin-bottom: 8px;
+        }
+
+        .col-33 {
+            flex-grow: 1;
+            display: inline;
+            margin-bottom: 0px;
+        }
+
+        .col-12 dd {
+            margin-bottom: 0px;
+        }
+
+        .footer-lower dl {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        .footer-nav-container dd {
+            margin-bottom: 14px;
+            margin-left: 0;
+            text-transform: capitalize;
+        }
+
+        .footer-nav-container .footer-line {
+            display: none;
+        }
+
+        .footer-lower dl:nth-child(7),
+        .facebook-logo,
+        .twitter-logo {
+            display: none
+        }
+
+        #driving-statistics {
+            margin-bottom: 20px;
+        }
+
+        #network-links {
+            display: flex; 
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        #network-links dd {
+            margin-right: 10px;
+            margin-left: 0;
+        }
+
+        @media (max-width: 768px) {
+            #footer>.container {
+                margin-left: 0;
+                min-width: 320px;
+            }
+
+            .footer-lower {
+                align-items: center;
+                gap: 20px;
+            }
+
+            .footer-lower dl {
+                padding-top: 0;
+            }
+
+            .footer-lower dl:nth-child(6) {
+                flex: 1 0 0;
+            }
+            .footer-line {
+                background-color: rgba(133, 133, 149, 0.20);
+            }
+        }
+
+        @media (max-width: 440px) {
+            #footer>.container p:nth-child(1) {
+                order: 5;
+                line-height: 135%;
+            }
+
+            #footer>.container div:not(#network-links):nth-child(2) {
+                display: none;
+            }
+
+            #footer>.container div:nth-child(3) {
+                order: 1;
+            }
+
+            #footer>.container div:nth-child(4) {
+                order: 2;
+            }
+
+            #footer>.container dl:nth-child(5) {
+                order: 3;
+            }
+
+            #footer>.container div:nth-child(6) {
+                order: 4;
+            }
+
+            #footer>.container div:nth-child(7) {
+                order: 7;
+            }
+
+            .footer-nav-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px 24px;
+            }
+
+            #footer>.container {
+                display: flex;
+                max-width: 375px;
+                padding: 28px 20px;
+                align-items: flex-start;
+                margin: 0 auto;
+            }
+
+            #footer {
+                width: 100vw;
+            }
+
+            .footer-nav-container .footer-line {
+                display: flex;
+                grid-column-start: 1;
+                grid-column-end: 3;
+                grid-row-start: 2;
+            }
+
+            .footer-nav-container dt {
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 115%;
+            }
+
+            .footer-nav-container dd {
+                margin-bottom: 0;
+            }
+
+            #driving-statistics,
+            .col-33 dd:not(:last-child) {
+                margin-bottom: 12px;
+            }
+
+            .col-12.footer-ee-network>div {
+                align-items: flex-start;
+                flex-wrap: wrap;
+            }
+
+            .footer-ee-network dd a {
+                text-align: center;
+                font-family: "Nordique Pro";
+                font-size: 15px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 150%;
+                letter-spacing: 0.3px;
+            }
+
+            .footer-ee-network dt {
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 135%;
+            }
+
+            .footer-lower .col-6 {
+                display: none;
+            }
+
+            .footer-lower dl {
+                padding-top: 0;
+            }
+            /* help center */
+            .footer-lower dl:nth-child(2) {
+                order: 1;
+                padding-top: 0;
+            }
+           /* terms and privacy */
+            .footer-lower dl:nth-child(3) {
+                order: 7;
+                flex: 1 0 0;
+            }
+            /* sitemap */
+            .footer-lower dl:nth-child(4) {
+                order: 2
+            }
+            /* all rights */
+            .footer-lower dl:nth-child(5) {
+                order: 8 !important;
+                margin-left: 88px;
+            }
+            /* mobile */            
+            .footer-lower dl:nth-child(6) {
+                order: 3;
+                flex: 0;
+            }
+            /* the last line */
+            .footer-lower dl:nth-child(7) {
+                order: 4;
+                display: block;
+            }
+            /* facebook */
+            .footer-lower dl:nth-child(8) {
+                order: 5;
+                display: block;
+            }
+            /* twitter */
+            .footer-lower dl:nth-child(9) {
+                order: 6;
+                display: block
+            }
+        }
+    </style>
+    <footer id="footer">
+        <div class="container" id="footer-container">
+            <p style="margin-bottom: 0;">Tests.ca is a privately owned website that is not affiliated with or operated by any government agency.</p>
+            <div class="footer-line"></div>
+            <div class="footer-nav-container">
+                <dl class="col-33">
+                    <dt>Car</dt>
+                    <dd><a href="https://tests.ca/premium/?from=footer-navigation&utm_source=car_desk_footer_nav&utm_medium=car-desk&utm_campaign=car-promo/" target=_blank class="ui-link">Upgrade to Premium</a></dd>
+                </dl>
+                <dl class="col-33">
+                    <dt>Commercial</dt>
+                    <dd><a href="https://tests.ca/cdl-premium/?from=footer-navigation&utm_source=cdl_desk_footer_nav&utm_medium=cdl-desk&utm_campaign=cdl-promo/" target=_blank class="ui-link">Upgrade to Premium</a></dd>
+                </dl>
+                <div class="footer-line"></div>
+                <dl class="col-33">
+                    <dt>About</dt>
+                    <dd><a href="/about/" class="ui-link">Who We Are</a></dd>
+                    <dd><a href="/cdn-cgi/l/email-protection#95fdf0f9f9fad5e1f0e6e1e6bbf6f4" class="ui-link">Contact us</a></dd>
+                </dl>
+                <dl class="col-33">
+                    <dt>Resources</dt>
+                    <dd><a href="https://tests.ca/library/" class="ui-link">For libraries</a></dd>
+                    <dd id="driving-statistics"><a href="https://tests.ca/driving-statistics/" target="_blank" class="ui-link">Driving statistics</a></dd>
+                    <dd><a href="https://driving-tests.org/vin-decoder/" target="_blank" class="ui-link">VIN decoder</a></dd>
+                    <dd style="margin-bottom: 0;"><a href="https://tests.ca/beginner-drivers/" target="_blank" class="ui-link">Beginner driver's guide</a></dd>
+                </dl>
+            </div>
+            <div class="footer-line"></div>
+            <dl class="col-12 footer-ee-network" style="margin-bottom: 0px;">
+                <dt> The Elegant E-Learning Network</dt>
+                <div id="network-links">
+                    <dd> <a href="https://toptests.co.uk/" target="_blank">TopTests</a></dd>
+                    <dd> <a href="https://www.g1.ca/" target="_blank">G1.ca</a></dd>
+                    <dd> <a href="https://driving-tests.org/" target="_blank">Driving-Tests.org</a></dd>
+                    <dd> <a href="https://tests.ca/british-columbia/icbc-knowledge-test/" target="_blank">icbc knowledge test</a></dd>
+                    <dd> <a href="https://cna.plus/" target="_blank">CNA practice test</a></dd>
+                    <dd> <a href="https://nurse.plus/" target="_blank">Nurse.plus</a></dd>
+                    <dd> <a href="https://barprephero.com/" target="_blank">Bar Exam Hero</a></dd>
+                </div>
+            </dl>
+            <div class="footer-line"></div>
+            <div class="footer-lower cols-row">
+                <dl class="col-6">
+                    <a id="logo" href="/">Tests.ca</a>
+                </dl>
+                <dl style="flex: 1 0 0; min-width: 102px;">
+                    <a href="/">
+                        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="24">
+                                <path id="Subtract" fill-rule="evenodd" clip-rule="evenodd" d="M3.84502 7.27151C3.5989 8.44816 3.5 10.0014 3.5 12.084C3.5 14.1638 3.59685 15.7157 3.8408 16.8925C4.08136 18.0529 4.44208 18.7334 4.88834 19.1816C5.33425 19.6294 6.01297 19.9933 7.17414 20.237C8.35199 20.4841 9.90912 20.584 12 20.584C14.0738 20.584 15.6226 20.4842 16.7973 20.2371C17.9554 19.9935 18.6386 19.6293 19.0899 19.1786C19.5412 18.728 19.9064 18.0454 20.1511 16.8871C20.3992 15.712 20.5 14.1614 20.5 12.084C20.5 9.99486 20.4008 8.43855 20.1543 7.2608C19.9113 6.09969 19.5481 5.42075 19.1007 4.97455C18.6531 4.52813 17.9731 4.1669 16.8124 3.92582C15.6353 3.68133 14.0822 3.58398 12 3.58398C9.91737 3.58398 8.36417 3.68288 7.18752 3.92901C6.02745 4.17167 5.34694 4.53464 4.8988 4.98278C4.45065 5.43093 4.08769 6.11144 3.84502 7.27151ZM2 12.084C2 3.65235 3.56837 2.08398 12 2.08398C20.4266 2.08398 22 3.62663 22 12.084C22 20.5 20.3996 22.084 12 22.084C3.53442 22.084 2 20.5 2 12.084Z" fill="#858595" fill-opacity="0.8" />
+                                <g id="Vector">
+                                    <path d="M12.6218 16.3057C12.4436 16.4839 12.202 16.584 11.95 16.584C11.698 16.584 11.4564 16.4839 11.2782 16.3057C11.1001 16.1276 11 15.8859 11 15.634V11.834C11 11.582 11.1001 11.3404 11.2782 11.1622C11.4564 10.9841 11.698 10.884 11.95 10.884C12.202 10.884 12.4436 10.9841 12.6218 11.1622C12.7999 11.3404 12.9 11.582 12.9 11.834V15.634C12.9 15.8859 12.7999 16.1276 12.6218 16.3057Z" fill="#858595" fill-opacity="0.8" />
+                                    <path d="M11.2782 7.36223C11.4564 7.18407 11.698 7.08398 11.95 7.08398H11.9595C12.2115 7.08398 12.4531 7.18407 12.6313 7.36223C12.8094 7.54039 12.9095 7.78203 12.9095 8.03398C12.9095 8.28594 12.8094 8.52758 12.6313 8.70574C12.4531 8.8839 12.2115 8.98398 11.9595 8.98398H11.95C11.698 8.98398 11.4564 8.8839 11.2782 8.70574C11.1001 8.52758 11 8.28594 11 8.03398C11 7.78203 11.1001 7.54039 11.2782 7.36223Z" fill="#858595" fill-opacity="0.8" />
+                                </g>
+                            </g>
+                        </svg>
+                        <span>Help Center</span>
+                    </a>
+                </dl>
+                <dl>
+                    <dd> <a href="/about/terms-of-use/">Terms and Privacy Policy</a></dd>
+                </dl>
+                <dl>
+                    <dd><a href="https://tests.org/sitemap/">Sitemap</a></dd>
+                </dl>
+                <dl>
+                    <dd>&#169; 2010-{current-year} All rights reserved.</dd>
+                </dl>
+                <dl>
+                    <dd><a href="https://m.tests.ca/" target="_blank">Mobile</a></dd>
+                </dl>
+                <dl class="footer-line" style="padding: 0;"></dl>
+                <dl class="facebook-logo" style="padding: 0;">
+                    <a href="https://facebook.com/" target="_blank">
+                        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="Group">
+                                <g id="Group_2">
+                                    <path id="Vector" d="M21 0.169922H3C1.3455 0.169922 0 1.51542 0 3.16992V21.1699C0 22.8244 1.3455 24.1699 3 24.1699H12V15.9199H9V12.1699H12V9.16992C12 6.68442 14.0145 4.66992 16.5 4.66992H19.5V8.41992H18C17.172 8.41992 16.5 8.34192 16.5 9.16992V12.1699H20.25L18.75 15.9199H16.5V24.1699H21C22.6545 24.1699 24 22.8244 24 21.1699V3.16992C24 1.51542 22.6545 0.169922 21 0.169922Z" fill="#858595" fill-opacity="0.8" />
+                                </g>
+                            </g>
+                        </svg>
+                    </a>
+                </dl>
+                <dl class="twitter-logo" style="padding: 0;">
+                    <a href="https://twitter.com/" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,256,256" width="24px" height="24px">
+                            <g fill="#858595" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                                <path d="M38.4,256c-21.20773,0 -38.4,-17.19227 -38.4,-38.4v-179.2c0,-21.20773 17.19227,-38.4 38.4,-38.4h179.2c21.20773,0 38.4,17.19227 38.4,38.4v179.2c0,21.20773 -17.19227,38.4 -38.4,38.4z" id="shape"></path>
+                            </g>
+                            <g fill="#000000" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                                <g transform="scale(5.12,5.12)">
+                                    <path d="M5.91992,6l14.66211,21.375l-14.35156,16.625h3.17969l12.57617,-14.57812l10,14.57813h12.01367l-15.31836,-22.33008l13.51758,-15.66992h-3.16992l-11.75391,13.61719l-9.3418,-13.61719zM9.7168,8h7.16406l23.32227,34h-7.16406z"></path>
+                                </g>
+                            </g>
+                        </svg>
+                    </a>
+                </dl>
+
+            </div>
+        </div>
+    </footer><!--[if lt IE 9]><script src="https://tests.ca/js/outdatedbrowser.min.js"></script><![endif]-->

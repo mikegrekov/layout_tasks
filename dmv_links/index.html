@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="states_copy.js"></script>
+</head>
+<body>
+  <script>
+    console.log("Total: " + Object.values(states).length);
+
+    console.log("Valid: " + Object.values(states).filter((item) => item.state.includes("valid")).length);
+    console.log("Failed: " + Object.values(states).filter((item) => item.state.includes("failed")).length);
+    
+  </script>
+</body>
+</html>
